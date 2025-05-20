@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 
 def cat_matrices2D(mat1, mat2, axis=0):
+    """
+    Concatenates two matrices along a specified axis.
+    Args:
+        mat1 (list of list of int/float): First matrix.
+        mat2 (list of list of int/float): Second matrix.
+        axis (int): Axis along which to concatenate. 0 for row-wise, 1 for column-wise.
+    Returns:
+        list of list of int/float: A new matrix formed by concatenating mat1 and mat2.
+    """
 
     # Get dimensions
     rows1, cols1 = len(mat1), len(mat1[0])

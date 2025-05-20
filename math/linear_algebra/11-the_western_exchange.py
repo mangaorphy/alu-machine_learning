@@ -2,14 +2,14 @@
 import numpy as np
 
 
-def np_transpose(matrix):
+def transpose(matrix):
     """
-    Transposes a numpy array.
+    Transposes a 2D list (matrix) using zip(*...).
 
     Args:
-        matrix (numpy.ndarray): Input array of any dimensionality.
+        matrix (list of lists): Input matrix.
 
     Returns:
-        numpy.ndarray: A new transposed array.
+        list of lists: Transposed matrix.
     """
-    return np.transpose(matrix)
+    return [list(row) for row in zip(*matrix)]

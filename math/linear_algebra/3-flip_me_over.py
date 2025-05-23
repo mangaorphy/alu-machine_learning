@@ -3,10 +3,6 @@
 def matrix_transpose(matrix):
     """
     Transposes a matrix.
-    Args:
-        matrix (list of list of int): Input matrix.
-    Returns:
-        list of list of int: Transposed matrix.
     """
     # Get the number of rows and cols
     rows = len(matrix)

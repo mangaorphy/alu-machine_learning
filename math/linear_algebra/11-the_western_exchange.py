@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
 """
-Transposes a 2D list (matrix) using zip(*...).
+transpose an n x m matrix (2D list) and return the transposed matrix.
 """
 
 
-def transpose(matrix):
+def np_transpose(matrix):
     """
-    Transposes a 2D list (matrix) using zip(*...).
-
-    Args:
-        matrix (list of lists): Input matrix.
-
-    Returns:
-        list of lists: Transposed matrix.
+    Returns the transpose of a 2D matrix
     """
-    return [list(row) for row in zip(*matrix)]
+    return matrix.transpose()

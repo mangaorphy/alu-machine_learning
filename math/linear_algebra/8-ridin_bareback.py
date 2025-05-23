@@ -13,7 +13,8 @@ def mat_mul(mat1, mat2):
         mat2: A list of lists representing the second matrix.
 
     Returns:
-        A new matrix that is the product of mat1 and mat2, or None if the matrices cannot be multiplied.
+        A new matrix that is the product of mat1 and mat2, or None
+        if the matrices cannot be multiplied.
     """
     if len(mat1[0]) != len(mat2):
         return None

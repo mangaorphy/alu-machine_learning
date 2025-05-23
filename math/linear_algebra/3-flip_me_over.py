@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
+"""
+Calculates the transpose of a matrix.
+"""
+
 
 def matrix_transpose(matrix):
     """
     Transposes a matrix.
+
     """
     # Get the number of rows and cols
     rows = len(matrix)

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+Concatenates two numpy arrays along a specified axis.
+"""
 import numpy as np
 
 

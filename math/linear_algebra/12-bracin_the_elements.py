@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Performs element-wise addition, subtraction, multiplication, and division on two numpy arrays.
+"""
+
 
 def np_elementwise(mat1, mat2):
     """

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-import numpy as np
+"""
+Transposes a 2D list (matrix) using zip(*...).
+"""
 
 
 def transpose(matrix):

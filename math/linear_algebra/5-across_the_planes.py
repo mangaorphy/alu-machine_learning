@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
+"""
+Adds two 2D matrices element-wise.
+"""
+
+
 def add_matrices2D(mat1, mat2):
     """Adds two 2D matrices element-wise.
+    Args:
+        mat1 (list of list of int/float): First matrix.
+        mat2 (list of list of int/float): Second matrix.
+    Returns:
+        list of list of int/float: Resultant matrix after addition.
     """
 
     if len(mat1) != len(mat2):

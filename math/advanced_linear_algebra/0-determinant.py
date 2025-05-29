@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 """
- Module to calculate the determinant of a square matrix using recursion.
+ Module to calculate the determinant of a square
+ matrix using recursion.
 """
 
 
 def determinant(matrix):
     """ Calculate the determinant of a square matrix.
     Args:
-        matrix (list of list of int/float): A square matrix represented as a list of lists.
+        matrix (list of list of int/float): A square
+        matrix represented as a list of lists.
     Returns:
         int/float: The determinant of the matrix.
     Raises:
-        TypeError: If the input is not a list of lists or if the matrix is empty.
-        ValueError: If the matrix is not square (i.e., rows are not of equal length).
+        TypeError: If the input is not a list
+        of lists or if the matrix is empty.
+        ValueError: If the matrix is not square
+        (i.e., rows are not of equal length).
     """
     # Input validation
     if not isinstance(matrix, list) or not all(

@@ -6,4 +6,4 @@ This repository contains my work and projects related to mathematics as part of 
 
 - Mathematical concepts and explanations
 - How to use matplotlib to plot graphs
-- How to use numpy inbuil functions to manipulate data and draw lines
+- How to use numpy inbuild functions to manipulate data and draw lines

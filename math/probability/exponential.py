@@ -1,66 +1,85 @@
 #!/usr/bin/env python3
-"""
-Defines a class for Exponential distribution.
-"""
-import math
+""" defines Exponential class that represents exponential distribution """
 
 
 class Exponential:
     """
-    Represents an exponential distribution.
+    class that represents exponential distribution
 
-    Attributes:
-        lambtha (float): The rate parameter of the distribution (inverse of the mean).
+    class constructor:
+        def __init__(self, data=None, lambtha=1.)
+
+    instance attributes:
+        lambtha [float]: the expected number of occurances in a given time
+
+    instance methods:
+        def pdf(self, x): calculates PDF for given time period
+        def cdf(self, x): calculates CDF for given time period
     """
 
     def __init__(self, data=None, lambtha=1.):
         """
-        Initialize the Exponential instance.
+        class constructor
 
-        Args:
-            data (list, optional): Data to estimate the distribution. Defaults to None.
-            lambtha (float, optional): Rate parameter of the distribution. Defaults to 1.
+        parameters:
+            data [list]: data to be used to estimate the distibution
+            lambtha [float]: the expected number of occurances on a given time
 
-        Raises:
-            ValueError: If lambtha is not positive or data has insufficient values.
-            TypeError: If data is not a list.
+        Sets the instance attribute lambtha as a float
+        If data is not given:
+            Use the given lambtha or
+            raise ValueError if lambtha is not positive value
+        If data is given:
+            Calculate the lambtha of data
+            Raise TypeError if data is not a list
+            Raise ValueError if data does not contain at least two data points
         """
-        if data is not None:
-            if not isinstance(data, list):
-                raise TypeError("data must be a list")
-            if len(data) < 2:
-                raise ValueError("data must contain multiple values")
-            # Calculate lambtha as the inverse of the mean of data
-            self.lambtha = 1.0 / (sum(data) / len(data))
-        else:
-            if lambtha <= 0:
+        if data is None:
+            if lambtha < 1:
                 raise ValueError("lambtha must be a positive value")
-            self.lambtha = float(lambtha)
+            else:
+                self.lambtha = float(lambtha)
+        else:
+            if type(data) is not list:
+                raise TypeError("data must be a list")
+            elif len(data) < 2:
+                raise ValueError("data must contain multiple values")
+            else:
+                lambtha = float(len(data) / sum(data))
+                self.lambtha = lambtha
 
     def pdf(self, x):
         """
-        Calculates the Probability Density Function (PDF) for a given time period.
+        calculates the value of the PDF for a given time period
 
-        Args:
-            x (float): Time period (must be ≥ 0).
+        parameters:
+            x [int]: time period
+                If x is out of range, return 0
 
-        Returns:
-            float: PDF value for x, or 0 if x is out of range.
+        return:
+            the PDF value for x
         """
         if x < 0:
-            return 0.0
-        return self.lambtha * math.exp(-self.lambtha * x)
+            return 0
+        e = 2.7182818285
+        lambtha = self.lambtha
+        pdf = lambtha * (e ** (-lambtha * x))
+        return pdf
 
     def cdf(self, x):
         """
-        Calculates the Cumulative Distribution Function (CDF) for a given time period.
+        calculates the value of the CDF for a given time period
 
-        Args:
-            x (float): Time period (must be ≥ 0).
+        parameters:
+            x [int]: time period
+                If x is out of range, return 0
 
-        Returns:
-            float: CDF value for x, or 0 if x is out of range.
+        return:
+            the CDF value for x
         """
         if x < 0:
-            return 0.0
-        return 1 - math.exp(-self.lambtha * x)
+            return 0
+        e = 2.7182818285
+        lambtha = self.lambtha
+        cdf = 1 - (e ** (-lambtha * x))
+        return cdf

@@ -1,95 +1,92 @@
 #!/usr/bin/env python3
-
-import numpy as np
-""" Tests the Neuron class by performing forward propagation on a dataset.
+"""Class Neuron that defines a single neuron performing binary classification
 """
 
 
+import numpy as np
+
+
 class Neuron:
+    """ Class Neuron
+    """
+
     def __init__(self, nx):
+        """ Instantiation function of the neuron
+
+        Args:
+            nx (_type_): _description_
+
+        Raises:
+            TypeError: _description_
+            ValueError: _description_
+        """
         if not isinstance(nx, int):
-            raise TypeError("nx must be a integer")
+            raise TypeError('nx must be an integer')
         if nx < 1:
-            raise ValueError("nx must be positive")
-        self.__W = np.random.randn(1, nx)
+            raise ValueError('nx must be positive')
+
+        # initialize private instance attributes
+        self.__W = np.random.normal(size=(1, nx))
         self.__b = 0
         self.__A = 0
 
+        # getter function
     @property
     def W(self):
+        """Return weights"""
         return self.__W
 
     @property
     def b(self):
+        """Return bias"""
         return self.__b
 
     @property
     def A(self):
+        """Return output"""
         return self.__A
 
     def forward_prop(self, X):
-        """
-        Calculates the forward propagation of the neuron
+        """Calculates the forward propagation of the neuron
 
         Args:
-            X: numpy.ndarray with shape (nx, m) containing input data
-               nx is the number of input features to the neuron
-               m is the number of examples
+            X (numpy.ndarray): matrix with the input data of shape (nx, m)
 
         Returns:
-            The private attribute __A (activation values)
+            numpy.ndarray: The output of the neural network.
         """
-        # Calculate linear combination: Z = W * X + b
-        Z = np.matmul(self.__W, X) + self.__b
-
-        # Apply sigmoid activation function: A = 1 / (1 + e^(-Z))
-        self.__A = 1 / (1 + np.exp(-Z))
-
+        z = np.matmul(self.__W, X) + self.__b
+        sigmoid = 1 / (1 + np.exp(-z))
+        self.__A = sigmoid
         return self.__A
 
     def cost(self, Y, A):
-        """
-        Calculates the cost of the model using logistic regression
+        """ Compute the of the model using logistic regression
 
         Args:
-            Y: numpy.ndarray with shape (1, m) containing correct labels for input data
-               m is the number of examples
-            A: numpy.ndarray with shape (1, m) containing activated output of the neuron for each example
+            Y (np.array): True values
+            A (np.array): Prediction valuesss
+
         Returns:
-            The cost
+            float: cost function
         """
-        # Get the number of examples
-        m = Y.shape[1]
-
-        # Calculate the logistic regression cost
-        # Cost = -1/m * sum(Y*log(A) + (1-Y)*log(1-A))
-        # Using 1.0000001 - A instead of 1 - A to avoid division by zero
-        cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
-
+        # calculate
+        loss = - (Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        cost = np.mean(loss)
         return cost
 
     def evaluate(self, X, Y):
-        """
-        Evaluates the neuron's predictions
+        """ Evaluate the cost function
 
         Args:
-            X: numpy.ndarray with shape (nx, m) containing input data
-               nx is the number of input features to the neuron
-               m is the number of examples
-            Y: numpy.ndarray with shape (1, m) containing correct labels for input data
+            X (np.array): Input array
+            Y (np.array): actual values
 
         Returns:
-            The neuron's prediction and the cost of the network, respectively
-            The prediction is a numpy.ndarray with shape (1, m) containing
-            the predicted labels for each example (1 if output >= 0.5, 0 otherwise)
+            tuple: Prediction and Cost
         """
-        # Forward propagation to get activations
-        A = self.forward_prop(X)
-
-        # Calculate cost
-        cost = self.cost(Y, A)
-
-        # Convert activations to predictions (1 if A >= 0.5, 0 otherwise)
-        predictions = np.where(A >= 0.5, 1, 0)
-
-        return predictions, cost
+        pred = self.forward_prop(X)
+        cost = self.cost(Y, pred)
+        pred = np.where(pred > 0.5, 1, 0)
+        return (pred, cost)
+    

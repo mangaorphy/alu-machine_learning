@@ -6,26 +6,26 @@ import numpy as np
 
 
 class NeuralNetwork:
-    """ Class that defines a neural network with one hidden layer performing
-        binary classification.
+    """Class that defines a neural network with one hidden layer performing
+    binary classification.
     """
 
     def __init__(self, nx, nodes):
-        """ Instantiation function
+        """Instantiation function
 
         Args:
             nx (int): size of the input layer
             nodes (_type_): _description_
         """
         if not isinstance(nx, int):
-            raise TypeError('nx must be an integer')
+            raise TypeError("nx must be an integer")
         if nx < 1:
-            raise ValueError('nx must be a positive integer')
+            raise ValueError("nx must be a positive integer")
 
         if not isinstance(nodes, int):
-            raise TypeError('nodes must be an integer')
+            raise TypeError("nodes must be an integer")
         if nodes < 1:
-            raise ValueError('nodes must be a positive integer')
+            raise ValueError("nodes must be a positive integer")
 
         self.__W1 = np.random.randn(nodes, nx)
         self.__b1 = np.zeros((nodes, 1))
@@ -66,7 +66,7 @@ class NeuralNetwork:
         return self.__A2
 
     def forward_prop(self, X):
-        """ Calculates the forward propagation of the neural network
+        """Calculates the forward propagation of the neural network
 
         Args:
             X (numpy.array): Input data with shape (nx, m)
@@ -78,4 +78,3 @@ class NeuralNetwork:
         sigmoid = 1 / (1 + np.exp(-z))
         self.__A2 = sigmoid
         return self.__A1, self.__A2
-    

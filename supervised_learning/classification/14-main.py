@@ -2,11 +2,11 @@
 
 import numpy as np
 
-NeuralNetwork = __import__('14-neural_network').NeuralNetwork
+NeuralNetwork = __import__("14-neural_network").NeuralNetwork
 
 # Load test data
-lib_train = np.load('../data/Binary_Train.npz')
-X_3D, Y = lib_train['X'], lib_train['Y']
+lib_train = np.load("../data/Binary_Train.npz")
+X_3D, Y = lib_train["X"], lib_train["Y"]
 X = X_3D.reshape((X_3D.shape[0], -1)).T
 
 # Initialize neural network
@@ -83,8 +83,7 @@ print(f"Predictions: {pred_before}")
 print(f"Cost: {cost_before:.6f}")
 
 # Train with more iterations for small example
-pred_after, cost_after = nn_small.train(
-    X_small, Y_small, iterations=1000, alpha=1.0)
+pred_after, cost_after = nn_small.train(X_small, Y_small, iterations=1000, alpha=1.0)
 print(f"\nAfter training (1000 iterations):")
 print(f"Predictions: {pred_after}")
 print(f"Cost: {cost_after:.6f}")
@@ -113,10 +112,15 @@ for i in [0, 10, 50, 100, 500, 1000]:
     else:
         # Train for remaining iterations
         _, cost = nn_demo.train(
-            X_small, Y_small, iterations=i - len(costs) * 10 if len(costs) > 0 else i, alpha=1.0)
+            X_small,
+            Y_small,
+            iterations=i - len(costs) * 10 if len(costs) > 0 else i,
+            alpha=1.0,
+        )
     costs.append(cost)
     print(f"Iteration {i}: Cost = {cost:.6f}")
 
 print(
-    f"\nCost is generally decreasing: {all(costs[i] >= costs[i + 1] for i in range(len(costs) - 1))}")
+    f"\nCost is generally decreasing: {all(costs[i] >= costs[i + 1] for i in range(len(costs) - 1))}"
+)
 print("Training complete!")

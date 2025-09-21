@@ -7,11 +7,10 @@ import numpy as np
 
 
 class Neuron:
-    """ Class Neuron
-    """
+    """Class Neuron"""
 
     def __init__(self, nx):
-        """ Instantiation function of the neuron
+        """Instantiation function of the neuron
 
         Args:
             nx (int): number of features to be initialized
@@ -21,9 +20,9 @@ class Neuron:
             ValueError: _description_
         """
         if not isinstance(nx, int):
-            raise TypeError('nx must be an integer')
+            raise TypeError("nx must be an integer")
         if nx < 1:
-            raise ValueError('nx must be positive')
+            raise ValueError("nx must be positive")
 
         # initialize private instance attributes
         self.__W = np.random.normal(size=(1, nx))
@@ -31,6 +30,7 @@ class Neuron:
         self.__A = 0
 
         # getter function
+
     @property
     def W(self):
         """Return weights"""
@@ -61,7 +61,7 @@ class Neuron:
         return self.__A
 
     def cost(self, Y, A):
-        """ Compute the of the model using logistic regression
+        """Compute the of the model using logistic regression
 
         Args:
             Y (np.array): True values
@@ -71,12 +71,12 @@ class Neuron:
             float: cost function
         """
         # calculate
-        loss = - (Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        loss = -(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
         cost = np.mean(loss)
         return cost
 
     def evaluate(self, X, Y):
-        """ Evaluate the cost function
+        """Evaluate the cost function
 
         Args:
             X (_type_): _description_
@@ -91,7 +91,7 @@ class Neuron:
         return (pred, cost)
 
     def gradient_descent(self, X, Y, A, alpha=0.05):
-        """ Calculate one pass of gradient descent on the neuron
+        """Calculate one pass of gradient descent on the neuron
 
         Args:
             X (_type_): _description_
@@ -101,13 +101,13 @@ class Neuron:
         """
         dz = A - Y
         m = X.shape[1]
-        dw = (1/m) * np.matmul(dz, X.T)
+        dw = (1 / m) * np.matmul(dz, X.T)
         db = np.mean(dz)
         self.__W -= alpha * dw
         self.__b -= alpha * db
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
-        """ Train the neuron: finding the global minuminus of the cost function
+        """Train the neuron: finding the global minuminus of the cost function
 
         Args:
             X (np.array): _description_
@@ -116,16 +116,15 @@ class Neuron:
             alpha (float, optional): _description_. Defaults to 0.05.
         """
         if not isinstance(iterations, int):
-            raise TypeError('iterations must be an integer')
+            raise TypeError("iterations must be an integer")
         if iterations < 0:
-            raise ValueError('iterations must be a positive integer')
+            raise ValueError("iterations must be a positive integer")
         if not isinstance(alpha, float):
-            raise TypeError('alpha must be a float')
+            raise TypeError("alpha must be a float")
         if alpha < 0:
-            raise ValueError('alpha must be positive')
+            raise ValueError("alpha must be positive")
 
         for _ in range(iterations):
             A = self.forward_prop(X)
             self.gradient_descent(X, Y, A, alpha)
         return self.evaluate(X, Y)
-    

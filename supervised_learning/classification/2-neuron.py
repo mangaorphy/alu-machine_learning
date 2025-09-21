@@ -7,11 +7,10 @@ import numpy as np
 
 
 class Neuron:
-    """ Class Neuron
-    """
+    """Class Neuron"""
 
     def __init__(self, nx):
-        """ Instantiation function of the neuron
+        """Instantiation function of the neuron
 
         Args:
             nx (_type_): _description_
@@ -21,9 +20,9 @@ class Neuron:
             ValueError: _description_
         """
         if not isinstance(nx, int):
-            raise TypeError('nx must be an integer')
+            raise TypeError("nx must be an integer")
         if nx < 1:
-            raise ValueError('nx must be positive')
+            raise ValueError("nx must be positive")
 
         # initialize private instance attributes
         self.__W = np.random.normal(size=(1, nx))
@@ -31,6 +30,7 @@ class Neuron:
         self.__A = 0
 
         # getter function
+
     @property
     def W(self):
         """Return weights"""
@@ -59,4 +59,3 @@ class Neuron:
         sigmoid = 1 / (1 + np.exp(-z))
         self.__A = sigmoid
         return self.__A
-    

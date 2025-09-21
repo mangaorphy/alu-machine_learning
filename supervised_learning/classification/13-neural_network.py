@@ -6,26 +6,26 @@ import numpy as np
 
 
 class NeuralNetwork:
-    """ Class that defines a neural network with one hidden layer performing
-        binary classification.
+    """Class that defines a neural network with one hidden layer performing
+    binary classification.
     """
 
     def __init__(self, nx, nodes):
-        """ Instantiation function
+        """Instantiation function
 
         Args:
             nx (int): size of the input layer
             nodes (_type_): _description_
         """
         if not isinstance(nx, int):
-            raise TypeError('nx must be an integer')
+            raise TypeError("nx must be an integer")
         if nx < 1:
-            raise ValueError('nx must be a positive integer')
+            raise ValueError("nx must be a positive integer")
 
         if not isinstance(nodes, int):
-            raise TypeError('nodes must be an integer')
+            raise TypeError("nodes must be an integer")
         if nodes < 1:
-            raise ValueError('nodes must be a positive integer')
+            raise ValueError("nodes must be a positive integer")
 
         self.__W1 = np.random.randn(nodes, nx)
         self.__b1 = np.zeros((nodes, 1))
@@ -66,7 +66,7 @@ class NeuralNetwork:
         return self.__A2
 
     def forward_prop(self, X):
-        """ Calculates the forward propagation of the neural network
+        """Calculates the forward propagation of the neural network
 
         Args:
             X (numpy.array): Input data with shape (nx, m)
@@ -80,7 +80,7 @@ class NeuralNetwork:
         return self.__A1, self.__A2
 
     def cost(self, Y, A):
-        """ Calculates the cost of the model using logistic regression
+        """Calculates the cost of the model using logistic regression
 
         Args:
             Y (_type_): _description_
@@ -91,7 +91,7 @@ class NeuralNetwork:
         return cost
 
     def evaluate(self, X, Y):
-        """ Evaluates the neural network’s predictions
+        """Evaluates the neural network’s predictions
 
         Args:
             X (_type_): _description_
@@ -101,7 +101,7 @@ class NeuralNetwork:
         return np.where(self.__A2 >= 0.5, 1, 0), self.cost(Y, self.__A2)
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
-        """ Calculates one pass of gradient descent on the neural network
+        """Calculates one pass of gradient descent on the neural network
 
         Args:
             X (_type_): _description_
@@ -121,4 +121,3 @@ class NeuralNetwork:
         self.__b2 -= alpha * db2
         self.__W1 -= alpha * dw1.T
         self.__b1 -= alpha * db1
-        

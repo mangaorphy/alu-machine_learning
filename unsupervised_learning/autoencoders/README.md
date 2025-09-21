@@ -1,0 +1,1 @@
+Autoencoders are a type of artificial neural network used to learn efficient representations of data, typically for the purpose of dimensionality reduction or feature learning. They work by encoding the input data into a lower-dimensional representation and then decoding it back to the original input space.
